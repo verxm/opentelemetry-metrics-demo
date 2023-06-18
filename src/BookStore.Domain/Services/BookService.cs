@@ -29,7 +29,7 @@ namespace BookStore.Domain.Services
 
         public async Task<Book> Add(Book book)
         {
-            if (_bookRepository.Search(b => b.Name == book.Name).Result.Any())
+            if ((await _bookRepository.SearchWithFunc(b => b.Name == book.Name)).Any())
                 return null;
 
             var category = await _categoryRepository.GetById(book.CategoryId);

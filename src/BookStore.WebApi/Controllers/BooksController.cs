@@ -25,7 +25,6 @@ namespace BookStore.WebApi.Controllers
         {
             var books = await _bookService.GetAll();
 
-
             return Ok(_mapper.Map<IEnumerable<BookResultDto>>(books));
         }
 

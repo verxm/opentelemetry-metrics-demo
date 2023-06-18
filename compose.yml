@@ -59,7 +59,7 @@ services:
     ports:
       - 5001:8080
     environment:
-      ConnectionStrings__DbConnection: Server=mssql;Database=BookStore;User Id=SA;Password=P@ssw0rd?;Encrypt=False
+      ConnectionStrings__DbConnection: Server=(localdb)\\mssql;Database=BookStore;Uid=SA;Pwd=P@ssw0rd?;Encrypt=False
       Otlp__Endpoint: http://otel-collector:4317
     networks:
       - metrics

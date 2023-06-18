@@ -12,9 +12,9 @@ namespace BookStore.Domain.Interfaces
         Task<List<TEntity>> GetAll();
         Task<TEntity> GetById(int id);
         Task Update(TEntity entity);
-        Task UpdateRange(IEnumerable<TEntity> entities);
         Task Remove(TEntity entity);
         Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> SearchWithFunc(Func<TEntity, bool> predicate);
         Task<int> SaveChanges();
     }
 }

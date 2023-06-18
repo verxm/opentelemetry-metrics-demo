@@ -3,8 +3,10 @@ using BookStore.Domain.Services;
 using BookStore.Infrastructure.Context;
 using BookStore.Infrastructure.Metrics;
 using BookStore.Infrastructure.Repositories;
+using BookStore.Infrastructure.Repositories.Fakers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,16 +14,19 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection RegisterInfrastureDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-
+            var connectionString = configuration.GetConnectionString("DbConnection");
+            Console.WriteLine(connectionString);
             services.AddDbContext<BookStoreDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DbConnection"));
+                options.UseSqlServer(connectionString);
             });
 
             services.AddScoped<BookStoreDbContext>();
 
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IBookRepository, BookRepository>();
+            //services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+            services.AddSingleton<IBookRepository, BookInMemoryRepository>();
+            //services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
 

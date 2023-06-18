@@ -71,5 +71,10 @@ namespace BookStore.Infrastructure.Repositories
         {
             Db?.Dispose();
         }
+
+        public Task<IEnumerable<TEntity>> SearchWithFunc(Func<TEntity, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

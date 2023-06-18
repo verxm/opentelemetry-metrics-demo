@@ -1,19 +1,19 @@
 # We choose exact tag (not 'latest'), to be sure that new version wont break creating image
-FROM mcr.microsoft.com/mssql/server:2017-CU17-ubuntu
+FROM mcr.microsoft.com/mssql/server:2022-latest
 
 # Create app directory
-RUN mkdir -p /usr/src/app
+# RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Copy initialization scripts
 COPY . /usr/src/app
 
 # Grant permissions for the run-initialization script to be executable
-RUN chmod +x /usr/src/app/import-data.sh
+# RUN chmod +x /usr/src/app/import-data.sh
 
 # Set environment variables, not to have to write them with docker run command
 # Note: make sure that your password matches what is in the run-initialization script 
-ENV SA_PASSWORD P@ssw0rd?
+ENV MSSQL_SA_PASSWORD P@ssw0rd?
 ENV ACCEPT_EULA Y
 ENV MSSQL_PID Express
 
